@@ -37,11 +37,11 @@ async function sendOtp({ email, context }) {
       });
 
 
-    await sendEmail({
+    sendEmail({
         to: email,
         subject,
         html
-    });
+    }).catch(console.error);
     console.log(`DEBUG OTP (${context}) for ${email}:`, otp);
 }
 module.exports ={

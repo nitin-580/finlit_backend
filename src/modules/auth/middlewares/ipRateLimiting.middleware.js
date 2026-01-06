@@ -14,6 +14,7 @@ async function ipRateLimiting(req,res,next){
             message: "Too many requests from this"
         })
     }
+    next();
 }
 module.exports ={
     ipRateLimiting
