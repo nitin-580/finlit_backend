@@ -58,3 +58,71 @@ Secure handling of secrets and credentials.
 Redis used for ephemeral data (OTP, rate-limiting ready).
 
 MongoDB reserved for persistent user and auth data.
+
+
+
+USER PROFILE SERVICE    
+
+User Info
+	•	Name
+	•	Experience level (Beginner / Intermediate / Advanced)
+	•	Country & market (India)
+
+Investor Preferences
+	•	Style: Long-term / Swing / Intraday
+	•	Risk appetite: Low / Medium / High
+	•	Goals: Learning / Wealth creation /Trading
+
+
+INGESTOR SERVICE
+
+A Market Data Service that:
+	•	Fetches data from external providers
+	•	Normalizes it
+	•	Stores it in your database
+
+Types of data to store
+	•	Stock prices (OHLCV)
+	•	Company fundamentals
+	•	Corporate actions
+	•	Market news headlines
+
+    
+    1️⃣ Price Data (mandatory)
+	•	Open
+	•	High
+	•	Low
+	•	Close
+	•	Volume
+	•	Timestamp
+
+(Timeframe: daily candles are enough initially)
+
+⸻
+
+2️⃣ Company Metadata
+	•	Symbol
+	•	Company name
+	•	Sector
+	•	Industry
+	•	Exchange (NSE/BSE)
+
+⸻
+
+3️⃣ Fundamentals (basic)
+	•	Market cap
+	•	PE ratio
+	•	EPS
+	•	Revenue
+	•	Debt
+
+⸻
+
+4️⃣ Corporate Actions (later)
+	•	Dividends
+	•	Splits
+	•	Bonuses
+
+
+ANALYSIS ENGINE
+
