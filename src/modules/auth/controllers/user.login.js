@@ -1,3 +1,8 @@
+const User = require('../model/user.model');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { sendOtp } = require('../service/otp.service');
+
 async function loginUser(req, res){
     const {email, password}=req.body
     try{
@@ -28,23 +33,27 @@ async function loginUser(req, res){
             process.env.JWT_REFRESH_SECRET,
             { expiresIn: "7d" }
         );
-        user.refreshToken = refreshToken;
+        user.refreshToken = refreshtoken;
         await user.save();
 
         res
-        .cookies("accessToken",accesstoken,{
+        .cookie("accessToken",accesstoken,{
             httpOnly: true,
             secure: true,
             sameSite: "strict",
             maxAge: 15 * 60 * 1000
         })
-        .cookies("refreshToken",refreshtoken,{
+        .cookie("refreshToken",refreshtoken,{
             httpOnly: true,
             secure: true,
             sameSite: "strict",
             maxAge: 7 * 24 * 60 * 60 * 1000
         });
-
+        await sendOtp({
+            email,
+            context: 'login'
+          });
+        
         return res.status(200).json({
             message: "Login successful",
             token,

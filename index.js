@@ -25,7 +25,6 @@ require("dotenv").config({
       console.log("🔄 Starting server...");
   
       await connectDB();
-      await connectRedis();
   
       const server = app.listen(PORT, () =>
         console.log(`🚀 Server running on PORT ${PORT}`)

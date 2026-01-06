@@ -5,6 +5,8 @@ const {refreshToken}= require('../controllers/user.refresh');
 const {logoutUser}= require('../controllers/user.logout');
 const {getMe}= require('../controllers/user.getme');
 const {authMiddleware} = require('../middlewares/auth.middleware')
+const {requestOtp} = require('../controllers/otp.request')
+const {verifyOtp} = require('../controllers/otp.verify')
 const router = express.Router();
 
 router.post('/register',createUser);
@@ -15,6 +17,8 @@ router.post('/logout',logoutUser)
 router.post('/forgot-password', (req, res) => {
     res.json({ message: 'Forgot password API not implemented yet' });
 });
+router.post('/request-otp',requestOtp)
+router.post('/verify-otp',verifyOtp)
 router.get('/test',(req,res)=>{
     return res.json({message:'Authentication api'})
 })

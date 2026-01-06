@@ -1,3 +1,5 @@
+const User = require("../model/user.model");
+
 async function logoutUser(req, res) {
     const userId = req.user.id;
 
