@@ -18,13 +18,18 @@
   "homepage": "https://github.com/nitin-580/finlit_backend#readme",
   "description": "",
   "dependencies": {
+    "@influxdata/influxdb-client": "^1.35.0",
+    "axios": "^1.13.2",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "ioredis": "^5.8.2",
+    "kafkajs": "^2.2.4",
     "mongoose": "^9.1.1",
-    "nodemailer": "^7.0.12"
+    "node-cron": "^4.2.1",
+    "nodemailer": "^7.0.12",
+    "pg": "^8.17.1"
   }
 }

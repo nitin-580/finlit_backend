@@ -239,3 +239,10 @@ Math first. Data second. AI last.
 Trust is built on correctness — not predictions.
 
 ⸻
+
+
+
+	go-influx → build Kafka → InfluxDB consumer now
+	•	verify-producer → add logging & safeguards to producer
+	•	multi-symbol → scale ingestion for many symbols
+	•	replay-test → replay Kafka history into DB
