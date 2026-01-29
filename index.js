@@ -1,5 +1,10 @@
 require("dotenv").config({
-  path: require("path").resolve(__dirname, ".env")
+  path:
+    process.env.NODE_ENV === "production"
+      ? ".env.production"
+      : process.env.NODE_ENV === "development"
+      ? ".env.local"
+      : ".env"
 });
 
 const express = require("express");
