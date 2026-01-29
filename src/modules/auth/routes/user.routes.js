@@ -13,7 +13,7 @@ console.log("loaded user.refresh");
 const {logoutUser}= require('../controllers/user.logout');
 console.log("loaded user.logout");
 
-const {getMe}= require('../controllers/user.getme');
+const {getMe}= require('../controllers/user.getMe');
 console.log("loaded user.getme");
 
 const {authMiddleware} = require('../middlewares/auth.middleware');
