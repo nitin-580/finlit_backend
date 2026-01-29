@@ -1,0 +1,3 @@
+2026-01-29 06:56:51 [ERROR]: Server startup failed: TypeError: connectRedis is not a function
+    at startServer (/Users/nitinkumar/Desktop/Debroi/APP/Website/Backend/index.js:44:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

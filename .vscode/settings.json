@@ -1,0 +1,16 @@
+{
+    "files.watcherExclude": {
+      "**/pgdata/**": true,
+      "**/mongo-data/**": true,
+      "**/redis-data/**": true,
+      "**/influxdb_data/**": true,
+      "**/node_modules/**": true
+    },
+    "files.exclude": {
+      "**/pgdata/**": true,
+      "**/mongo-data/**": true,
+      "**/redis-data/**": true,
+      "**/influxdb_data/**": true,
+      "**/node_modules/**": true
+    }
+  }
