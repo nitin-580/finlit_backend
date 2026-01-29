@@ -1,3 +1,5 @@
+const redis = require("../../../config/redis.config");
+
 async function ipRateLimiting(req,res,next){
     const ip = req.ip;
     const key = `rate-limit:${ip}`;
