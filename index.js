@@ -19,7 +19,8 @@ const logger = require("./src/utils/logger");
 logger.debug("Loading route file...");
 const userRoute = require("./src/modules/auth/routes/user.routes");
 logger.debug("Loaded userRoute");
-
+const adminRoute = require("./src/modules/blog/admin/routes/admin.routes");
+logger.debug("Loaded adminRoute")
 const { connectDB } = require("./src/config/mongo.config");
 logger.debug("Mongo config loaded");
 
