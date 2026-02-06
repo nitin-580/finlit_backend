@@ -1,248 +1,367 @@
-🚀 DEBROI – Backend Architecture & Progress
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DEBROI – Backend Architecture & Documentation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+      padding: 20px 40px;
+      max-width: 980px;
+      margin: auto;
+      color: #222;
+    }
+    h1, h2, h3 {
+      color: #0b4f9c;
+    }
+    code, pre {
+      background: #f4f4f4;
+      padding: 6px 10px;
+      border-radius: 5px;
+      display: block;
+      overflow-x: auto;
+      margin-top: 10px;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+    .img-box img {
+      max-width: 100%;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 10px;
+    }
+    table td, table th {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+    table th {
+      background: #e9f0f8;
+    }
+    .center {
+      text-align: center;
+    }
+  </style>
+</head>
 
-A scalable, production-ready backend for a Finance + AI platform, built with reliability, security, and future AI extensibility in mind.
+<body>
 
-⸻
+<!-- Header / Logo -->
+<div align="center" id="top">
+  <picture>
+    <img src="assets/debroi.png" alt="Debroi" width="300">
+  </picture>
+</div>
 
-📌 Current Milestone Overview
+<p align="center">
+  <em>A production-grade backend for Finance + AI — built with stability, correctness & scalable intelligence.</em>
+</p>
 
-This milestone focuses on infrastructure stability, authentication, and core service foundations required before introducing analytics and AI.
+<p align="center">
+  <a href="README.html">🇬🇧 English</a> •
+  <a href="#">🇮🇳 Hindi</a> •
+  <a href="#">🇺🇸 US</a>
+</p>
 
-⸻
+<p align="center">
+  <img src="https://img.shields.io/badge/status-active-brightgreen" />
+  <img src="https://img.shields.io/badge/version-0.1.0-blue" />
+  <img src="https://img.shields.io/badge/built%20for-finance%20%2B%20AI-yellow" />
+  <img src="https://img.shields.io/github/stars/debroi" />
+</p>
 
-🏗️ Infrastructure & Core Setup
+<hr/>
 
-🔴 Redis (Ephemeral Data Layer)
-	•	Configured Redis using Docker with persistent volumes
-	•	Verified connectivity using ioredis
-	•	Used for:
-	•	OTP storage
-	•	Short-lived tokens
-	•	Future rate limiting & caching
-	•	Ensured single auto-connection (no duplicate client creation)
+<!-- Overview -->
+<h1>🚀 DEBROI – Backend Architecture & Progress</h1>
+<p>
+  A scalable, production-ready backend for a Finance + AI platform, built with 
+  reliability, security, and future AI extensibility in mind.
+</p>
 
-🟢 MongoDB (Persistent Data Layer)
-	•	Configured MongoDB using Docker
-	•	Validated connections using Mongoose
-	•	Reserved strictly for:
-	•	User data
-	•	Authentication data
-	•	Long-lived domain data
+<hr/>
 
-🔐 Environment Management
-	•	Centralized environment variables using dotenv
-	•	Resolved path and load-order issues
-	•	No secrets hard-coded in the codebase
+<!-- Milestone -->
+<h2>📌 Current Milestone Overview</h2>
+<p>
+  This milestone focuses on infrastructure stability, authentication, and core service foundations required 
+  before introducing analytics and AI.
+</p>
 
-⸻
+<hr/>
 
-⚙️ Server Startup & Reliability
+<!-- Core Infra -->
+<h2>🏗️ Infrastructure & Core Setup</h2>
 
-Production-Ready Startup Sequence
-	•	MongoDB connects before server starts
-	•	Redis connects before server starts
-	•	Server fails fast if any critical dependency is unavailable
+<h3>🔴 Redis (Ephemeral Layer)</h3>
+<ul>
+  <li>Configured using Docker with persistent volumes</li>
+  <li>Connected via <code>ioredis</code></li>
+  <li>Used for:
+    <ul>
+      <li>OTP storage</li>
+      <li>Short-lived tokens</li>
+      <li>Future caching + rate limiting</li>
+    </ul>
+  </li>
+  <li>Ensured single global connection instance</li>
+</ul>
 
-Graceful Shutdown Handling
+<h3>🟢 MongoDB (Persistent Layer)</h3>
+<ul>
+  <li>Configured using Docker</li>
+  <li>Connected via <code>Mongoose</code></li>
+  <li>Used strictly for persistent domain data:
+    <ul>
+      <li>Users</li>
+      <li>Authentication</li>
+      <li>Preferences</li>
+    </ul>
+  </li>
+</ul>
 
-Handled SIGINT and SIGTERM signals:
-	•	Redis connections close cleanly
-	•	HTTP server stops accepting new requests
-	•	Process exits only after safe cleanup
+<h3>🔐 Environment Management</h3>
+<ul>
+  <li>Centralized environment variables using dotenv</li>
+  <li>No secrets are hardcoded</li>
+</ul>
 
-⸻
+<hr/>
 
-🧩 API & Routing Structure
+<!-- Startup -->
+<h2>⚙️ Server Startup & Reliability</h2>
 
-Routing
-	•	All authentication routes are namespaced under:
+<h3>Production-Ready Startup</h3>
+<ul>
+  <li>MongoDB must connect before server starts</li>
+  <li>Redis must connect before server starts</li>
+  <li>Fail-fast if any dependency fails</li>
+</ul>
 
-/api/v1/auth
+<h3>Graceful Shutdown</h3>
+<ul>
+  <li>Closes Redis connection</li>
+  <li>Stops HTTP server accepting new requests</li>
+  <li>Ensures safe cleanup before process exit</li>
+</ul>
 
+<hr/>
 
-	•	Fixed Express routing issues caused by:
-	•	Missing controllers
-	•	Undefined handlers
-	•	Ensured all routes are wired to valid controller functions
+<!-- Routing -->
+<h2>🧩 API & Routing Structure</h2>
 
-Code Organization
-	•	Clear separation of concerns:
+<p><b>Namespace:</b> <code>/api/v1/auth</code></p>
 
+<h3>Routing Fixes</h3>
+<ul>
+  <li>Resolved missing controllers</li>
+  <li>Connected all routes to valid handlers</li>
+  <li>Modular, scalable folder structure</li>
+</ul>
+
+<h3>Folder Structure</h3>
+
+<pre><code>
 routes/
 controllers/
 services/
 utils/
 config/
+</code></pre>
 
+<hr/>
 
+<!-- OTP -->
+<h2>🔐 Authentication & OTP System</h2>
 
-⸻
+<h3>Secure OTP Flow</h3>
+<ul>
+  <li>Strong OTP generation utility</li>
+  <li>OTP hashed before storage</li>
+  <li>Stored in Redis with strict TTL</li>
+  <li>Delivery abstracted (Email/SMS ready)</li>
+  <li>No OTP ever exposed to the user</li>
+</ul>
 
-🔐 Authentication & OTP System
+<h3>Use Cases</h3>
+<ul>
+  <li>OTP-based login</li>
+  <li>Password recovery</li>
+  <li>Future 2FA support</li>
+</ul>
 
-OTP Flow (Secure by Design)
-	•	Secure OTP generation using a dedicated utility
-	•	OTPs are:
-	•	Hashed before storage
-	•	Stored in Redis with a strict TTL
-	•	OTP delivery layer abstracted (Email/SMS placeholder)
-	•	No OTP is ever exposed in API responses
+<hr/>
 
-Supported Use Cases
-	•	OTP-based login
-	•	Password recovery
-	•	Future 2FA support
+<!-- User Profile -->
+<h2>👤 User Profile Service</h2>
 
-⸻
+<h3>User Information</h3>
+<ul>
+  <li>Name</li>
+  <li>Experience level: Beginner / Intermediate / Advanced</li>
+  <li>Country & Market: India (initial)</li>
+</ul>
 
-👤 User Profile Service
+<h3>Investor Preferences</h3>
+<ul>
+  <li>Investment style: Long-term / Swing / Intraday</li>
+  <li>Risk appetite: Low / Medium / High</li>
+  <li>Goals: Learning / Wealth creation / Trading</li>
+</ul>
 
-User Information
-	•	Name
-	•	Experience level:
-	•	Beginner
-	•	Intermediate
-	•	Advanced
-	•	Country & Market:
-	•	India (initial focus)
+<p>
+  This service enables personalization for analytics and future AI layers.
+</p>
 
-Investor Preferences
-	•	Investment style:
-	•	Long-term
-	•	Swing
-	•	Intraday
-	•	Risk appetite:
-	•	Low
-	•	Medium
-	•	High
-	•	Goals:
-	•	Learning
-	•	Wealth creation
-	•	Trading
+<hr/>
 
-This service provides personalization context for analytics and AI layers.
+<!-- Market Ingestor -->
+<h2>📡 Market Data Ingestor Service</h2>
 
-⸻
+<p>The only service responsible for calling external market APIs.</p>
 
-📡 Market Data Ingestor Service
+<h3>Responsibilities</h3>
+<ul>
+  <li>Fetch price & metadata from external providers</li>
+  <li>Normalize data into internal schemas</li>
+  <li>Store clean & reproducible market data</li>
+</ul>
 
-A dedicated service responsible for data ingestion and normalization.
+<h3>Data Types</h3>
+<ol>
+  <li><b>Price Data</b> (Daily candles)</li>
+  <li>Company Metadata (NSE/BSE)</li>
+  <li>Fundamentals (basic metrics)</li>
+  <li>Corporate Actions (planned)</li>
+</ol>
 
-Responsibilities
-	•	Fetch data from external market providers
-	•	Normalize data into internal schemas
-	•	Store clean, reproducible data in the database
+<hr/>
 
-Data Types Supported
+<!-- Analysis Engine -->
+<h2>📊 Analysis Engine (Deterministic Intelligence Layer)</h2>
 
-1️⃣ Price Data (Mandatory)
-	•	Open
-	•	High
-	•	Low
-	•	Close
-	•	Volume
-	•	Timestamp
-Timeframe: Daily candles (MVP)
+<p>A pure mathematical engine. No AI, no predictions.</p>
 
-2️⃣ Company Metadata
-	•	Symbol
-	•	Company name
-	•	Sector
-	•	Industry
-	•	Exchange (NSE / BSE)
+<h3>Technical Indicators</h3>
+<ul>
+  <li>SMA</li>
+  <li>EMA</li>
+  <li>RSI</li>
+  <li>MACD</li>
+</ul>
 
-3️⃣ Fundamentals (Basic)
-	•	Market capitalization
-	•	P/E ratio
-	•	EPS
-	•	Revenue
-	•	Debt
+<h3>Risk & Trend</h3>
+<ul>
+  <li>Volatility</li>
+  <li>Trend (Up / Down / Sideways)</li>
+  <li>Basic support/resistance</li>
+</ul>
 
-4️⃣ Corporate Actions (Planned)
-	•	Dividends
-	•	Stock splits
-	•	Bonuses
+<h3>Design Principles</h3>
+<ul>
+  <li>Deterministic → same input → same output</li>
+  <li>No randomness</li>
+  <li>No AI or LLM usage</li>
+</ul>
 
-AI and analytics will never call external APIs directly — only this service does.
+<hr/>
 
-⸻
+<!-- Best Practices -->
+<h2>✅ Best Practices Followed</h2>
 
-📊 Analysis Engine (Deterministic Intelligence Layer)
+<ul>
+  <li>Infrastructure-first design</li>
+  <li>Fail-fast startup validation</li>
+  <li>Graceful shutdown</li>
+  <li>Secure environment management</li>
+  <li>Clear service boundaries</li>
+  <li>Redis → ephemeral</li>
+  <li>MongoDB → persistent</li>
+  <li>AI-ready design (no AI yet)</li>
+</ul>
 
-A pure mathematical engine — no AI, no predictions.
+<hr/>
 
-Technical Indicators
-	•	SMA (Simple Moving Average)
-	•	EMA (Exponential Moving Average)
-	•	RSI (Relative Strength Index)
-	•	MACD
+<!-- Architecture -->
+<h2>🗺️ High-Level Architecture</h2>
 
-Risk & Trend Analysis
-	•	Volatility assessment
-	•	Trend direction:
-	•	Uptrend
-	•	Downtrend
-	•	Sideways
-	•	Basic support & resistance detection
-
-Design Principles
-	•	Deterministic outputs (same input → same result)
-	•	No randomness
-	•	No LLM usage
-	•	Clean separation from ingestion and AI layers
-
-This engine produces ground-truth signals that AI will later explain.
-
-⸻
-
-✅ Best Practices Followed
-	•	Infrastructure-first design
-	•	Fail-fast startup validation
-	•	Graceful shutdown handling
-	•	Secure secret management
-	•	Clear service boundaries
-	•	Redis for ephemeral data only
-	•	MongoDB for persistent domain data
-	•	AI-ready architecture (but AI-free for now)
-
-⸻
-
-🗺️ High-Level Architecture
-
+<pre><code>
 Auth Service
-   ↓
+ ↓
 User Profile Service
-   ↓
+ ↓
 Market Data Ingestor
-   ↓
+ ↓
 Market Data Database
-   ↓
+ ↓
 Analysis Engine
-   ↓
-(AI / Alerts / APIs – upcoming)
+ ↓
+AI / Alerts / APIs (upcoming)
+</code></pre>
 
+<hr/>
 
-⸻
+<!-- Next -->
+<h2>🚧 What’s Next</h2>
 
-🚧 What’s Next
-	•	Redis caching for hot market & analysis data
-	•	Kafka-based ingestion & event streaming
-	•	AI explanation layer (LangChain + LangGraph)
-	•	Alerts & watchlist system
-	•	Role-based access & monetization
+<ul>
+  <li>Redis caching for hot data</li>
+  <li>Kafka-based ingestion → scalable producer</li>
+  <li>InfluxDB consumer</li>
+  <li>AI explanation layer (LangChain + LangGraph)</li>
+  <li>Alerts & watchlist system</li>
+  <li>Role-based access & monetization</li>
+</ul>
 
-⸻
+<hr/>
 
-🧠 Philosophy
+<!-- Philosophy -->
+<h2>🧠 Philosophy</h2>
+<pre><code>
+Math first.
+Data second.
+AI last.
 
-Math first. Data second. AI last.
 Trust is built on correctness — not predictions.
+</code></pre>
 
-⸻
+<hr/>
 
+<!-- Kafka -->
+<h2>⚙️ Kafka + InfluxDB Progress</h2>
 
+<ul>
+  <li>go-influx → build Kafka producer/consumer</li>
+  <li>verify-producer → add logging & safeguards</li>
+  <li>multi-symbol ingestion scaling</li>
+  <li>replay-test → replay Kafka history into InfluxDB</li>
+</ul>
 
-	go-influx → build Kafka → InfluxDB consumer now
-	•	verify-producer → add logging & safeguards to producer
-	•	multi-symbol → scale ingestion for many symbols
-	•	replay-test → replay Kafka history into DB
+<hr/>
+
+<h2>📜 About</h2>
+<p>
+  Debroi is a scalable backend providing real-time financial data, indicators, 
+  and market research endpoints.
+</p>
+
+<hr/>
+
+<h2>📚 License</h2>
+<p>MIT License</p>
+
+<hr/>
+
+<p align="center">
+  <strong>Built with ❤️ by the Debroi Team</strong><br/>
+  <em>Accuracy. Reliability. Intelligence.</em>
+</p>
+
+</body>
+</html>
